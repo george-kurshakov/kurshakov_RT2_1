@@ -1,0 +1,119 @@
+\hypertarget{state__machine_8cpp}{}\doxysection{E\+:/\+RT/ros/src/kurshakov\+\_\+\+RT2\+\_\+1/src/state\+\_\+machine.cpp File Reference}
+\label{state__machine_8cpp}\index{E:/RT/ros/src/kurshakov\_RT2\_1/src/state\_machine.cpp@{E:/RT/ros/src/kurshakov\_RT2\_1/src/state\_machine.cpp}}
+
+
+A node implementing a state machine.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+assignment1/\+Command.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+assignment1/\+Random\+Position.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$rt2\+\_\+assignment1/\+Position\+Action.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{state__machine_8cpp_a9c21a7caee326d7803b94ae1952b27ca}\label{state__machine_8cpp_a9c21a7caee326d7803b94ae1952b27ca}} 
+\#define {\bfseries IDLE}~0
+\item 
+\mbox{\Hypertarget{state__machine_8cpp_a5107a8c7df704815bb62f77994e6f3f3}\label{state__machine_8cpp_a5107a8c7df704815bb62f77994e6f3f3}} 
+\#define {\bfseries SETTING\+\_\+\+GOAL}~1
+\item 
+\mbox{\Hypertarget{state__machine_8cpp_ab069d376e67472e3849c0ab7c769412f}\label{state__machine_8cpp_ab069d376e67472e3849c0ab7c769412f}} 
+\#define {\bfseries WAITING\+\_\+\+SUCCESS}~2
+\item 
+\mbox{\Hypertarget{state__machine_8cpp_a8e0faf39731ba4260c68e6d87801779d}\label{state__machine_8cpp_a8e0faf39731ba4260c68e6d87801779d}} 
+\#define {\bfseries STOPPING}~3
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{state__machine_8cpp_a1a9543636935547580c0657f4c7c0c2b}{user\+\_\+interface}} (rt2\+\_\+assignment1\+::\+Command\+::\+Request \&req, rt2\+\_\+assignment1\+::\+Command\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em User interface server callback. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{state__machine_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{state__machine_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}{state}} = IDLE
+\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A node implementing a state machine. 
+
+The node is used to communicate with the user interface processing user commands and managing the robot behaviour. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{state__machine_8cpp_a1a9543636935547580c0657f4c7c0c2b}\label{state__machine_8cpp_a1a9543636935547580c0657f4c7c0c2b}} 
+\index{state\_machine.cpp@{state\_machine.cpp}!user\_interface@{user\_interface}}
+\index{user\_interface@{user\_interface}!state\_machine.cpp@{state\_machine.cpp}}
+\doxysubsubsection{\texorpdfstring{user\_interface()}{user\_interface()}}
+{\footnotesize\ttfamily bool user\+\_\+interface (\begin{DoxyParamCaption}\item[{rt2\+\_\+assignment1\+::\+Command\+::\+Request \&}]{req,  }\item[{rt2\+\_\+assignment1\+::\+Command\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+User interface server callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & service request \\
+\hline
+{\em res} & service response \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if succeeded
+\end{DoxyReturn}
+Callback is setting the state according to a received command\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Command   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ State    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Command   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ State    }\\\cline{1-2}
+\endhead
+start   &SETTING\+\_\+\+GOAL    \\\cline{1-2}
+stop   &IDLE    \\\cline{1-2}
+stop\+\_\+now   &STOPPING   \\\cline{1-2}
+\end{longtabu}
+
+
+Definition at line 46 of file state\+\_\+machine.\+cpp.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}\label{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}} 
+\index{state\_machine.cpp@{state\_machine.cpp}!state@{state}}
+\index{state@{state}!state\_machine.cpp@{state\_machine.cpp}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily int state = IDLE}
+
+
+
+State variable. 
+
+Can have following values\+: \tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Behaviour    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Behaviour    }\\\cline{1-2}
+\endhead
+IDLE   &do not send any requests    \\\cline{1-2}
+SETTING\+\_\+\+GOAL   &get a random position value from /position\+\_\+server and send it as a goal to /go\+\_\+to\+\_\+point    \\\cline{1-2}
+WAITING\+\_\+\+SUCCESS   &check if the goal position has been reached    \\\cline{1-2}
+STOPPING   &send a goal cancel request to /go\+\_\+to\+\_\+point   \\\cline{1-2}
+\end{longtabu}
+
+
+Definition at line 30 of file state\+\_\+machine.\+cpp.
+

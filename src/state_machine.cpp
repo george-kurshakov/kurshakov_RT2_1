@@ -1,3 +1,10 @@
+/**
+ *  \file state_machine.cpp
+ *  \brief A node implementing a state machine.
+ *  
+ *  The node is used to communicate with the user interface processing user commands and managing the robot behaviour.
+ */
+
 #include "ros/ros.h"
 #include "rt2_assignment1/Command.h"
 #include "rt2_assignment1/RandomPosition.h"
@@ -10,8 +17,32 @@
 #define WAITING_SUCCESS 2
 #define STOPPING        3
 
+/** \brief State variable.
+ *  
+ *  Can have following values:
+ *  Value           |   Behaviour
+ *  --------------- | -----------------
+ *  IDLE            |   do not send any requests
+ *  SETTING_GOAL    |   get a random position value from /position_server and send it as a goal to /go_to_point
+ *  WAITING_SUCCESS |   check if the goal position has been reached
+ *  STOPPING        |   send a goal cancel request to /go_to_point
+ */
 int state = IDLE;
 
+/**
+ *  \brief User interface server callback
+ *  
+ *  \param req service request
+ *  \param res service response
+ *  \return true if succeeded
+ *  
+ *  Callback is setting the state according to a received command:
+ *     Command    |     State
+ *  ------------- | -------------
+ *      start     | SETTING_GOAL 
+ *      stop      |     IDLE
+ *     stop_now   |   STOPPING
+ */
 bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Command::Response &res){
     if (req.command == "start"){
     	state = SETTING_GOAL;
@@ -45,23 +76,30 @@ int main(int argc, char **argv)
    	ros::spinOnce();
     switch (state) {
       case SETTING_GOAL:
+        // Call /position_server for random position
         client_rp.call(rp);
         p.x = rp.response.x;
         p.y = rp.response.y;
         p.theta = rp.response.theta;
         std::cout << "\nGoing to the position: x= " << p.x << " y= " <<p.y << " theta = " <<p.theta << std::endl;
+        // Send the position as a goal to /go_to_point
         ac.sendGoal(p);
+        // Wait until the goal is reached
         state = WAITING_SUCCESS;
         break;
       case WAITING_SUCCESS:
+        // Is the goal reached?
         if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
         {
           std::cout << "\nGoal position reached!" << std::endl;
+          // Set a new goal
           state = SETTING_GOAL;
         }
         break;
       case STOPPING:
+        // Send a goal cancel request to /go_to_point
         ac.cancelGoal();
+        // Wait for further instructions...
         state = IDLE;
     }
    }

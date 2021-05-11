@@ -1,3 +1,15 @@
+## 
+#  @file user_interface.py
+#  @brief A node implementing the user interface.
+#  
+#  The user can use the following digit keys to control the behaviour of the robot:
+#  Key        |    Behaviour
+#  ---------- | ------------
+#  0          | Stop when the current goal is reached 
+#  1          | Start reaching a new random goal
+#  any other  | Stop immediately
+#  
+
 import rospy
 import time
 from rt2_assignment1.srv import Command

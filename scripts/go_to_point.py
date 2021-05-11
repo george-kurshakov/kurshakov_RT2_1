@@ -1,3 +1,7 @@
+## 
+#  @file go_to_point.py
+#  @brief A node implementing goal reaching algorithm
+#  
 #! /usr/bin/env python
 
 import rospy
@@ -28,6 +32,14 @@ ub_a = 0.6
 lb_a = -0.5
 ub_d = 0.6
 
+## 
+#  @brief Odometry callback
+#  
+#  @param  msg /odom message
+#  @return nothing
+#  
+#  @details Getting current position and yaw.
+#  
 def clbk_odom(msg):
     global position_
     global yaw_
@@ -44,7 +56,12 @@ def clbk_odom(msg):
     euler = transformations.euler_from_quaternion(quaternion)
     yaw_ = euler[2]
 
-
+## 
+#  @brief Change goal reaching state
+#  
+#  @param  state New state
+#  @return nothing
+#  
 def change_state(state):
     global state_
     state_ = state
@@ -115,12 +132,25 @@ def fix_final_yaw(des_yaw):
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(3)
         
+## 
+#  @brief Set all the velocities to 0
+#  
+#  @return nothing
+#  
 def done():
     twist_msg = Twist()
     twist_msg.linear.x = 0
     twist_msg.angular.z = 0
     pub_.publish(twist_msg)
   
+## 
+#  @brief Action implementation
+#  
+#  @param  goal New goal
+#  @return nothing
+#  
+#  @details A simple state machine for reaching the goal.
+#  
 def planning(goal):
 
     global state_
@@ -140,6 +170,7 @@ def planning(goal):
 
     while not rospy.is_shutdown():
         if act_s.is_preempt_requested():
+            # Set velocities to 0!
             done()
             rospy.loginfo('Goal was preempted')
             act_s.set_preempted()
