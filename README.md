@@ -30,7 +30,7 @@ The node is connected to the **state_machine** via a service, passing the user c
 #### state_machine
 
 A node managing the robot behaviour. 
-It receives commands from **user_interface** via a service and implemets a simple finite state machine.
+It receives commands from **user_interface** via a service and implements a simple finite state machine.
 It can request the **random_position_server** for a random position, send this position as a goal
 for **go_to_point** action and cancel the goal if requested.
 
