@@ -11,11 +11,11 @@ def main():
     while not rospy.is_shutdown():
         if (x == 1):
             ui_client("start")
-            x = int(input("\nPrint 0 to stop the robot when the position will be reached\nPrint any digit to stop the robot right now "))
+            x = int(input("\nPrint 0 to stop the robot when the position will be reached\nPrint 1 to set a new goal\nPrint any other digit to stop the robot right now "))
         elif (x == 0):
             print("Please wait, the robot is going to stop when the position will be reached")
             ui_client("stop")
-            x = int(input("\nPrint 1 to start the robot\nPrint any digit to stop the robot right now "))
+            x = int(input("\nPrint 1 to set a new goal\nPrint any other digit to stop the robot right now "))
         else:
             ui_client("stop_now")
             x = int(input("\nPrint 1 to start the robot "))

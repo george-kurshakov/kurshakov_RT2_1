@@ -55,10 +55,13 @@ int main(int argc, char **argv)
         break;
       case WAITING_SUCCESS:
         if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+        {
+          std::cout << "\nGoal position reached!" << std::endl;
           state = SETTING_GOAL;
+        }
         break;
       case STOPPING:
-        ac.cancelAllGoals();
+        ac.cancelGoal();
         state = IDLE;
     }
    }
