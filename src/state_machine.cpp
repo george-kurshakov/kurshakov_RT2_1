@@ -1,3 +1,9 @@
+/**
+ * @file state_machine.cpp
+ * @brief A node implementing a state machine.
+ *  
+ *  The node is used to communicate with the user interface processing user commands and managing the robot behaviour.
+ */
 #include <chrono>
 #include <cinttypes>
 #include <memory>
@@ -20,10 +26,18 @@ using std::placeholders::_3;
 
 namespace rt2_assignment1
 {
-
+/**
+ * @brief A class implementing a state machine.
+ * 
+ */
 class StateMachine : public rclcpp::Node
 {
 public:
+/**
+ * @brief Construct a new State Machine object
+ * 
+ * @param options 
+ */
   StateMachine(const rclcpp::NodeOptions & options)
   : Node("state_machine",options)
   {
@@ -66,6 +80,13 @@ public:
   
  private:
  
+ /**
+  * @brief A user interface server callback
+  * 
+  * @param request_id Request ID
+  * @param request Service request
+  * @param response Service response
+  */
    void user_interface(
          const std::shared_ptr<rmw_request_id_t> request_id,
          const std::shared_ptr<Command::Request> request,
@@ -82,6 +103,10 @@ public:
      RCLCPP_INFO(this->get_logger(), "Request received %s", request->command.c_str());
    }
    
+   /**
+    * @brief A function checking the state of the goal.
+    * Calls go_to_point if requested.
+    */
   void state_goal(){
     
      if(!goal_reached) return;
@@ -92,6 +117,10 @@ public:
    
    }
    
+   /**
+    * @brief A function calling go_to_point service.
+    * 
+    */
    void goToPoint_call(){
    
      randomPosition_call();
@@ -109,6 +138,10 @@ public:
      auto fResult = client_p -> async_send_request(request_p, goal_reached_callback);
    }
    
+   /**
+    * @brief A function calling random_position_server service.
+    * 
+    */
    void randomPosition_call(){
    
      auto response_rp_callback = [this](rclcpp::Client<rt2_assignment1::srv::RandomPosition>::SharedFuture future){response_rp = future.get();};
@@ -116,9 +149,17 @@ public:
      auto fResult = client_rp-> async_send_request(request_rp, response_rp_callback);
    }
 
-   
+   /**
+    * @brief A shared pointer to user_interface service
+    */
    rclcpp::Service<Command>::SharedPtr service_c;
+   /**
+    * @brief A shared pointer to random_position_service client
+    */
    rclcpp::Client<RandomPosition>::SharedPtr client_rp;
+   /**
+    * @brief A shared pointer to go_to_point client
+    */
    rclcpp::Client<Position>::SharedPtr client_p;
    
    std::shared_ptr<RandomPosition::Request> request_rp;
@@ -129,8 +170,8 @@ public:
    bool goal_reached;
    
    rclcpp::TimerBase::SharedPtr timer_;
- }; /* class closed */
+ };
 
-} /* namespace closed*/
+}
 
 RCLCPP_COMPONENTS_REGISTER_NODE(rt2_assignment1::StateMachine)

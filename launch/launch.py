@@ -1,3 +1,7 @@
+## 
+#  @file launch.py
+#  @brief A script launching Node Container and loading components
+#  
 import launch
 from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
