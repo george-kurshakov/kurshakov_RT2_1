@@ -2,6 +2,7 @@
 
 
 import rospy
+from std_msgs.msg import Float32
 from geometry_msgs.msg import Twist, Point
 from nav_msgs.msg import Odometry
 from tf import transformations
@@ -14,6 +15,8 @@ yaw_ = 0
 position_ = 0
 state_ = 0
 pub_ = None
+pub_l = None
+pub_r = None
 
 # parameters for control
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
@@ -64,6 +67,8 @@ def fix_yaw(des_pos):
             twist_msg.angular.z = ub_a
         elif twist_msg.angular.z < lb_a:
             twist_msg.angular.z = lb_a
+    pub_l.publish(-twist_msg.angular)
+    pub_r.publish(twist_msg.angular)
     pub_.publish(twist_msg)
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_2_:
@@ -86,6 +91,8 @@ def go_straight_ahead(des_pos):
             twist_msg.linear.x = ub_d
 
         twist_msg.angular.z = kp_a*err_yaw
+        pub_l.publish(twist_msg.linear - twist_msg.angular)
+        pub_r.publish(twist_msg.linear + twist_msg.angular)
         pub_.publish(twist_msg)
     else: # state change conditions
         #print ('Position error: [%s]' % err_pos)
@@ -106,6 +113,8 @@ def fix_final_yaw(des_yaw):
             twist_msg.angular.z = ub_a
         elif twist_msg.angular.z < lb_a:
             twist_msg.angular.z = lb_a
+    pub_l.publish(-twist_msg.angular)
+    pub_r.publish(twist_msg.angular)
     pub_.publish(twist_msg)
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_2_:
@@ -117,6 +126,8 @@ def done():
     twist_msg.linear.x = 0
     twist_msg.angular.z = 0
     pub_.publish(twist_msg)
+    pub_l.publish(0.0)
+    pub_r.publish(0.0)
     
 def go_to_point(req):
     desired_position = Point()
@@ -138,8 +149,12 @@ def go_to_point(req):
 
 def main():
     global pub_
+    global pub_l
+    global pub_r
     rospy.init_node('go_to_point')
-    pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+    pub_ = rospy.Publisher('/cmd_vel')
+    pub_l = rospy.Publisher('/leftwheel_vel', Float32, queue_size=1)
+    pub_r = rospy.Publisher('/rightwheel_vel', Float32, queue_size=1)
     sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom)
     service = rospy.Service('/go_to_point', Position, go_to_point)
     rospy.spin()
