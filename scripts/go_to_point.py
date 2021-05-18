@@ -14,7 +14,6 @@ position_ = Point()
 yaw_ = 0
 position_ = 0
 state_ = 0
-pub_ = None
 pub_l = None
 pub_r = None
 
@@ -26,7 +25,7 @@ kp_a = -3.0
 kp_d = 0.2
 ub_a = 0.6
 lb_a = -0.5
-ub_d = 0.6
+ub_d = 100
 
 def clbk_odom(msg):
     global position_
@@ -57,6 +56,7 @@ def normalize_angle(angle):
     return angle
 
 def fix_yaw(des_pos):
+    rospy.loginfo('entering fix_yaw')
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = normalize_angle(desired_yaw - yaw_)
     rospy.loginfo(err_yaw)
@@ -67,16 +67,19 @@ def fix_yaw(des_pos):
             twist_msg.angular.z = ub_a
         elif twist_msg.angular.z < lb_a:
             twist_msg.angular.z = lb_a
-    pub_l.publish(-twist_msg.angular)
-    pub_r.publish(twist_msg.angular)
-    pub_.publish(twist_msg)
+    rospy.loginfo('needed twist received')
+    pub_l.publish(twist_msg.angular.z)
+    pub_r.publish(-twist_msg.angular.z)
+    rospy.loginfo('velocities published')
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_2_:
+        rospy.loginfo('yaw fixed')
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(1)
 
 
 def go_straight_ahead(des_pos):
+    rospy.loginfo('entering go_ahead')
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = desired_yaw - yaw_
     err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
@@ -86,14 +89,13 @@ def go_straight_ahead(des_pos):
 
     if err_pos > dist_precision_:
         twist_msg = Twist()
-        twist_msg.linear.x = 0.3
+        twist_msg.linear.x = 5.0
         if twist_msg.linear.x > ub_d:
             twist_msg.linear.x = ub_d
 
         twist_msg.angular.z = kp_a*err_yaw
-        pub_l.publish(twist_msg.linear - twist_msg.angular)
-        pub_r.publish(twist_msg.linear + twist_msg.angular)
-        pub_.publish(twist_msg)
+        pub_l.publish(twist_msg.linear.x + twist_msg.angular.z)
+        pub_r.publish(twist_msg.linear.x - twist_msg.angular.z)
     else: # state change conditions
         #print ('Position error: [%s]' % err_pos)
         change_state(2)
@@ -104,6 +106,7 @@ def go_straight_ahead(des_pos):
         change_state(0)
 
 def fix_final_yaw(des_yaw):
+    rospy.loginfo('entering fix_final_yaw')
     err_yaw = normalize_angle(des_yaw - yaw_)
     rospy.loginfo(err_yaw)
     twist_msg = Twist()
@@ -113,23 +116,20 @@ def fix_final_yaw(des_yaw):
             twist_msg.angular.z = ub_a
         elif twist_msg.angular.z < lb_a:
             twist_msg.angular.z = lb_a
-    pub_l.publish(-twist_msg.angular)
-    pub_r.publish(twist_msg.angular)
-    pub_.publish(twist_msg)
+    pub_l.publish(twist_msg.angular.z)
+    pub_r.publish(-twist_msg.angular.z)
     # state change conditions
     if math.fabs(err_yaw) <= yaw_precision_2_:
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(3)
         
 def done():
-    twist_msg = Twist()
-    twist_msg.linear.x = 0
-    twist_msg.angular.z = 0
-    pub_.publish(twist_msg)
+    rospy.loginfo('entering done')
     pub_l.publish(0.0)
     pub_r.publish(0.0)
     
 def go_to_point(req):
+    rospy.loginfo('service request received')
     desired_position = Point()
     desired_position.x = req.x
     desired_position.y = req.y
@@ -137,26 +137,32 @@ def go_to_point(req):
     change_state(0)
     while True:
     	if state_ == 0:
+            #print("calling fix_yaw")
     		fix_yaw(desired_position)
     	elif state_ == 1:
+            #print("calling go_straight_ahead")
     		go_straight_ahead(desired_position)
     	elif state_ == 2:
+            #print("calling fix_final_yaw")
     		fix_final_yaw(des_yaw)
     	elif state_ == 3:
+            #print("calling done")
     		done()
     		break
     return True
 
 def main():
-    global pub_
     global pub_l
     global pub_r
     rospy.init_node('go_to_point')
-    pub_ = rospy.Publisher('/cmd_vel')
+    rospy.loginfo('go_to_point started')
     pub_l = rospy.Publisher('/leftwheel_vel', Float32, queue_size=1)
     pub_r = rospy.Publisher('/rightwheel_vel', Float32, queue_size=1)
+    rospy.loginfo('publishers initialized')
     sub_odom = rospy.Subscriber('/odom', Odometry, clbk_odom)
+    rospy.loginfo('subscriber initialized')
     service = rospy.Service('/go_to_point', Position, go_to_point)
+    rospy.loginfo('service initialized')
     rospy.spin()
 
 if __name__ == '__main__':
