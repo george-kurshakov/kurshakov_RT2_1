@@ -1,5 +1,9 @@
+## 
+#  @file go_to_point.py
+#  @brief A node implementing goal reaching algorithm
+#  The main and only difference with the original file is implementing separate publishers for left and right wheel.
+#  
 #! /usr/bin/env python
-
 
 import rospy
 from std_msgs.msg import Float32

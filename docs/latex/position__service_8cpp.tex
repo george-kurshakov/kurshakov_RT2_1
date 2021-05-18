@@ -1,0 +1,67 @@
+\hypertarget{position__service_8cpp}{}\doxysection{E\+:/\+RT/ros/src/kurshakov\+\_\+\+RT2\+\_\+1/src/position\+\_\+service.cpp File Reference}
+\label{position__service_8cpp}\index{E:/RT/ros/src/kurshakov\_RT2\_1/src/position\_service.cpp@{E:/RT/ros/src/kurshakov\_RT2\_1/src/position\_service.cpp}}
+
+
+A node implementing the random position service.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}rt2\+\_\+assignment1/\+Random\+Position.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{position__service_8cpp_a10f83119b77a8fbd085a5550955f85ff}{rand\+MToN}} (double M, double N)
+\begin{DoxyCompactList}\small\item\em Get a random number from M to N. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{position__service_8cpp_ab65b9ff5368189ad34fe4989d50742e4}{myrandom}} (rt2\+\_\+assignment1\+::\+Random\+Position\+::\+Request \&req, rt2\+\_\+assignment1\+::\+Random\+Position\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em Random Position server callback. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{position__service_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{position__service_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+int {\bfseries main} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A node implementing the random position service. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{position__service_8cpp_ab65b9ff5368189ad34fe4989d50742e4}\label{position__service_8cpp_ab65b9ff5368189ad34fe4989d50742e4}} 
+\index{position\_service.cpp@{position\_service.cpp}!myrandom@{myrandom}}
+\index{myrandom@{myrandom}!position\_service.cpp@{position\_service.cpp}}
+\doxysubsubsection{\texorpdfstring{myrandom()}{myrandom()}}
+{\footnotesize\ttfamily bool myrandom (\begin{DoxyParamCaption}\item[{rt2\+\_\+assignment1\+::\+Random\+Position\+::\+Request \&}]{req,  }\item[{rt2\+\_\+assignment1\+::\+Random\+Position\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Random Position server callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & Service request \\
+\hline
+{\em res} & Servise response \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True is succeeded
+\end{DoxyReturn}
+Responds with a random position. \mbox{\Hypertarget{position__service_8cpp_a10f83119b77a8fbd085a5550955f85ff}\label{position__service_8cpp_a10f83119b77a8fbd085a5550955f85ff}} 
+\index{position\_service.cpp@{position\_service.cpp}!randMToN@{randMToN}}
+\index{randMToN@{randMToN}!position\_service.cpp@{position\_service.cpp}}
+\doxysubsubsection{\texorpdfstring{randMToN()}{randMToN()}}
+{\footnotesize\ttfamily double rand\+MToN (\begin{DoxyParamCaption}\item[{double}]{M,  }\item[{double}]{N }\end{DoxyParamCaption})}
+
+
+
+Get a random number from M to N. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em M} & Minimum value \\
+\hline
+{\em N} & Maximum value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A random number from M to N 
+\end{DoxyReturn}

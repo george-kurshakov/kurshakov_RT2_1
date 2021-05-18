@@ -1,10 +1,33 @@
+/**
+ *  \file state_machine.cpp
+ *  \brief A node implementing a state machine.
+ *  
+ *  The node is used to communicate with the user interface processing user commands and managing the robot behaviour.
+ */
 #include "ros/ros.h"
 #include "rt2_assignment1/Command.h"
 #include "rt2_assignment1/Position.h"
 #include "rt2_assignment1/RandomPosition.h"
 
+/**
+ * @brief Start variable
+ * Can have following values:
+ *  Value           |   Behaviour
+ *  --------------- | -----------------
+ *  true            |   keep getting random positions and sending them as goals
+ *  false           |   do nothing
+ */
 bool start = false;
 
+/**
+ *  \brief User interface server callback
+ *  
+ *  \param req service request
+ *  \param res service response
+ *  \return true if succeeded
+ *  
+ *  Callback is setting the state variable according to a received command.
+ */
 bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Command::Response &res){
     if (req.command == "start"){
     	start = true;
