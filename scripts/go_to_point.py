@@ -15,7 +15,7 @@ import math
 # robot state variables
 position_ = Point()
 yaw_ = 0
-position_ = 0
+# position_ = 0
 state_ = 0
 pub_ = None
 
