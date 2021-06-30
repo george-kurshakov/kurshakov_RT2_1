@@ -29,6 +29,8 @@
  */
 int state = IDLE;
 
+bool isGoalCanceled = false;
+
 /**
  *  \brief User interface server callback
  *  
@@ -51,7 +53,10 @@ bool user_interface(rt2_assignment1::Command::Request &req, rt2_assignment1::Com
     	state = IDLE;
     }
     if (req.command == "stop_now"){
-      state = STOPPING;
+    	if (isGoalCanceled)
+    	    state = IDLE;
+    	else
+      	    state = STOPPING;
     }
     return true;
 }
@@ -99,6 +104,8 @@ int main(int argc, char **argv)
       case STOPPING:
         // Send a goal cancel request to /go_to_point
         ac.cancelGoal();
+        // Avoid canceling the goal when it's not set
+        isGoalCanceled = true;
         // Wait for further instructions...
         state = IDLE;
     }
