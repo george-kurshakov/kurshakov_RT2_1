@@ -1,6 +1,9 @@
 ## 
 #  @file go_to_point.py
 #  @brief A node implementing goal reaching algorithm
+#  @author Georgii A. Kurshakov
+#  @version 1.0
+#  @date 02/07/2021
 #  
 #! /usr/bin/env python
 

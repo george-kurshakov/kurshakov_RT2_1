@@ -1,6 +1,9 @@
 /**
  *  \file position_service.cpp
  *  \brief A node implementing the random position service
+ *  \author Georgii A. Kurshakov
+ *  \version 1.0
+ *  \date 02/07/2021
  */
 
 #include "ros/ros.h"

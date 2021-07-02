@@ -67,7 +67,9 @@ $(function() {
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
 By Georgii A. Kurshakov</h1>
-<p>The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment.</p>
+<p>The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment. </p><blockquote class="doxtable">
+<p>This branch contains the Doxygen documentation since it was here from the beginning! For the Sphinx documentation another branch will be created. </p>
+</blockquote>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Required packages</h2>
 <ul>
@@ -81,31 +83,22 @@ Required packages</h2>
 Description of the system</h2>
 <p>The package consists of the following nodes:</p>
 <ul>
-<li><b>user_interface</b></li>
 <li><b>state_machine</b></li>
 <li><b>random_position_server</b></li>
 <li><b>go_to_point</b></li>
 </ul>
 <h3><a class="anchor" id="autotoc_md4"></a>
-user_interface</h3>
-<p>A simple node allowing the user to communicate with the system setting the robot behaviour. Using digit keys the user is able to make the robot reach a random goal, stop upon reaching it or stop immediately. The node is connected to the <b>state_machine</b> via a service, passing the user commands to it.</p>
-<h3><a class="anchor" id="autotoc_md5"></a>
 state_machine</h3>
 <p>A node managing the robot behaviour. It receives commands from <b>user_interface</b> via a service and implements a simple finite state machine. It can request the <b>random_position_server</b> for a random position, send this position as a goal for <b>go_to_point</b> action and cancel the goal if requested.</p>
-<h3><a class="anchor" id="autotoc_md6"></a>
+<h3><a class="anchor" id="autotoc_md5"></a>
 random_position_server</h3>
 <p>A node implementing a service for generating random positions. Provides the <b>state_machine</b> with random positions for <b>go_to_point</b>.</p>
-<h3><a class="anchor" id="autotoc_md7"></a>
+<h3><a class="anchor" id="autotoc_md6"></a>
 go_to_point</h3>
 <p>A node implementing an action for reaching the goal position using a publisher on topic */cmd_vel* and a subscriber on topic */odom*. <b>state_machine</b> is able to send a goal and cancel it. Once the goal is cancelled, the robot stops immediately.</p>
-<h2><a class="anchor" id="autotoc_md8"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 Instructions to run the code</h2>
-<p>To launch the simulation, please run: </p><div class="fragment"><div class="line">roslaunch rt2_assignment1 sim.launch</div>
-</div><!-- fragment --><p>Use digit keys to control the robot behavoiur:</p><ul>
-<li><b>0</b> to stop upon reaching the goal;</li>
-<li><b>1</b> to start moving or set a new goal;</li>
-<li>any other digit to stop immediately. </li>
-</ul>
+<p>All the instructions can be found in the <b>interface.ipynb</b> Jupyter Notebook file. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->

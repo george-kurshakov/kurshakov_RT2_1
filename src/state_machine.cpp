@@ -1,6 +1,9 @@
 /**
  *  \file state_machine.cpp
  *  \brief A node implementing a state machine.
+ *  \author Georgii A. Kurshakov
+ *  \version 1.0
+ *  \date 02/07/2021
  *  
  *  The node is used to communicate with the user interface processing user commands and managing the robot behaviour.
  */
