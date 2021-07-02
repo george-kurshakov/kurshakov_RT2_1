@@ -38,7 +38,10 @@ int {\bfseries main} (int argc, char $\ast$$\ast$argv)
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}{state}} = IDLE
-\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{state__machine_8cpp_aa0153a172f8c2acee346be680c5802c4}\label{state__machine_8cpp_aa0153a172f8c2acee346be680c5802c4}} 
+bool \mbox{\hyperlink{state__machine_8cpp_aa0153a172f8c2acee346be680c5802c4}{is\+Goal\+Canceled}} = false
+\begin{DoxyCompactList}\small\item\em A variable used to avoid sending goal cancel request when there is no goal. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -83,10 +86,6 @@ stop\+\_\+now   &STOPPING   \\\cline{1-2}
 \end{longtabu}
 
 
-Definition at line 46 of file state\+\_\+machine.\+cpp.
-
-
-
 \doxysubsection{Variable Documentation}
 \mbox{\Hypertarget{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}\label{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}} 
 \index{state\_machine.cpp@{state\_machine.cpp}!state@{state}}
@@ -113,7 +112,3 @@ SETTING\+\_\+\+GOAL   &get a random position value from /position\+\_\+server an
 WAITING\+\_\+\+SUCCESS   &check if the goal position has been reached    \\\cline{1-2}
 STOPPING   &send a goal cancel request to /go\+\_\+to\+\_\+point   \\\cline{1-2}
 \end{longtabu}
-
-
-Definition at line 30 of file state\+\_\+machine.\+cpp.
-

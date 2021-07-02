@@ -82,9 +82,7 @@ $(function() {
 <code>#include &lt;actionlib/client/simple_action_client.h&gt;</code><br />
 <code>#include &lt;actionlib/client/terminal_state.h&gt;</code><br />
 <code>#include &lt;rt2_assignment1/PositionAction.h&gt;</code><br />
-</div>
-<p><a href="state__machine_8cpp_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
+</div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a9c21a7caee326d7803b94ae1952b27ca"><td class="memItemLeft" align="right" valign="top"><a id="a9c21a7caee326d7803b94ae1952b27ca"></a>
@@ -114,12 +112,14 @@ Variables</h2></td></tr>
 <tr class="memitem:a89f234133d3efe315836311cbf21c64b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8cpp.html#a89f234133d3efe315836311cbf21c64b">state</a> = IDLE</td></tr>
 <tr class="memdesc:a89f234133d3efe315836311cbf21c64b"><td class="mdescLeft">&#160;</td><td class="mdescRight">State variable.  <a href="state__machine_8cpp.html#a89f234133d3efe315836311cbf21c64b">More...</a><br /></td></tr>
 <tr class="separator:a89f234133d3efe315836311cbf21c64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0153a172f8c2acee346be680c5802c4"><td class="memItemLeft" align="right" valign="top"><a id="aa0153a172f8c2acee346be680c5802c4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="state__machine_8cpp.html#aa0153a172f8c2acee346be680c5802c4">isGoalCanceled</a> = false</td></tr>
+<tr class="memdesc:aa0153a172f8c2acee346be680c5802c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">A variable used to avoid sending goal cancel request when there is no goal. <br /></td></tr>
+<tr class="separator:aa0153a172f8c2acee346be680c5802c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A node implementing a state machine. </p>
 <p>The node is used to communicate with the user interface processing user commands and managing the robot behaviour. </p>
-
-<p class="definition">Definition in file <a class="el" href="state__machine_8cpp_source.html">state_machine.cpp</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a1a9543636935547580c0657f4c7c0c2b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1a9543636935547580c0657f4c7c0c2b">&#9670;&nbsp;</a></span>user_interface()</h2>
@@ -167,8 +167,6 @@ Variables</h2></td></tr>
 <td class="markdownTableBodyNone">stop_now   </td><td class="markdownTableBodyNone">STOPPING   </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="state__machine_8cpp_source.html#l00046">46</a> of file <a class="el" href="state__machine_8cpp_source.html">state_machine.cpp</a>.</p>
-
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
@@ -197,8 +195,6 @@ Variables</h2></td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">STOPPING   </td><td class="markdownTableBodyNone">send a goal cancel request to /go_to_point   </td></tr>
 </table>
-
-<p class="definition">Definition at line <a class="el" href="state__machine_8cpp_source.html#l00030">30</a> of file <a class="el" href="state__machine_8cpp_source.html">state_machine.cpp</a>.</p>
 
 </div>
 </div>

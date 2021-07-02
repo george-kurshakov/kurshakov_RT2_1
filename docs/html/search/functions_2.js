@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['myrandom_20',['myrandom',['../position__service_8cpp.html#ab65b9ff5368189ad34fe4989d50742e4',1,'position_service.cpp']]]
+  ['fix_5ffinal_5fyaw_23',['fix_final_yaw',['../go__to__point_8py.html#a4a406386ca62830c19c93949e923f7bd',1,'go_to_point']]],
+  ['fix_5fyaw_24',['fix_yaw',['../go__to__point_8py.html#a9c3011a3065fcbefcc1c5ad8c9979669',1,'go_to_point']]]
 ];

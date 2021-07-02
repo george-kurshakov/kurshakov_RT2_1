@@ -29,6 +29,10 @@
  */
 int state = IDLE;
 
+/**
+ * @brief A variable used to avoid sending goal cancel request when there is no goal.
+ * 
+ */
 bool isGoalCanceled = false;
 
 /**

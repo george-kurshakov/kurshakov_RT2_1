@@ -3,6 +3,7 @@
 ## By Georgii A. Kurshakov
 
 The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment.
+> This branch contains the Doxygen documentation since it was here from the beginning! For the Sphinx documentation another branch will be created.
 
 ### Required packages
 
@@ -16,16 +17,9 @@ The package contains the nodes and the simulation environment for controlling a 
 
 The package consists of the following nodes:
 
-- **user_interface**
 - **state_machine**
 - **random_position_server**
 - **go_to_point**
-
-#### user_interface
-
-A simple node allowing the user to communicate with the system setting the robot behaviour.
-Using digit keys the user is able to make the robot reach a random goal, stop upon reaching it or stop immediately.
-The node is connected to the **state_machine** via a service, passing the user commands to it.
 
 #### state_machine
 
@@ -46,12 +40,4 @@ A node implementing an action for reaching the goal position using a publisher o
 
 ### Instructions to run the code
 
-To launch the simulation, please run:
-```
-roslaunch rt2_assignment1 sim.launch
-```
-
-Use digit keys to control the robot behavoiur:
-- **0** to stop upon reaching the goal;
-- **1** to start moving or set a new goal;
-- any other digit to stop immediately.
+All the instructions can be found in the **interface.ipynb** Jupyter Notebook file.

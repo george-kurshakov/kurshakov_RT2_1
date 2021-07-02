@@ -66,12 +66,23 @@ def change_state(state):
     state_ = state
     print ('State changed to [%s]' % state_)
 
-
+## 
+#  @brief Keep the angle within the constraints
+#  
+#  @param  angle An angle to normalize
+#  @return Normalized angle
+#  
 def normalize_angle(angle):
     if(math.fabs(angle) > math.pi):
         angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
     return angle
 
+## 
+#  @brief Fix the initial yaw
+#  
+#  @param  des_pos Desired position value
+#  @return nothing
+#  
 def fix_yaw(des_pos):
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = normalize_angle(desired_yaw - yaw_)
@@ -90,7 +101,12 @@ def fix_yaw(des_pos):
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(1)
 
-
+## 
+#  @brief Go straight ahead reaching the desired position
+#  
+#  @param  des_pos Desired position value
+#  @return nothing
+#  
 def go_straight_ahead(des_pos):
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = desired_yaw - yaw_
@@ -118,6 +134,12 @@ def go_straight_ahead(des_pos):
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(0)
 
+## 
+#  @brief Fix the final yaw
+#  
+#  @param  des_yaw Desired yaw value
+#  @return nothing
+#  
 def fix_final_yaw(des_yaw):
     err_yaw = normalize_angle(des_yaw - yaw_)
     rospy.loginfo(err_yaw)

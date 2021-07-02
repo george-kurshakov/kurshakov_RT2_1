@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['planning_21',['planning',['../go__to__point_8py.html#ad80fa73a15e1a5576fea98b4958dcef4',1,'go_to_point']]]
+  ['go_5fstraight_5fahead_25',['go_straight_ahead',['../go__to__point_8py.html#ac8579665c0fbf665f734476554fac37d',1,'go_to_point']]]
 ];

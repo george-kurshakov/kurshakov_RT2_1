@@ -91,7 +91,7 @@ user_interface</h3>
 <p>A simple node allowing the user to communicate with the system setting the robot behaviour. Using digit keys the user is able to make the robot reach a random goal, stop upon reaching it or stop immediately. The node is connected to the <b>state_machine</b> via a service, passing the user commands to it.</p>
 <h3><a class="anchor" id="autotoc_md5"></a>
 state_machine</h3>
-<p>A node managing the robot behaviour. It receives commands from <b>user_interface</b> via a service and implemets a simple finite state machine. It can request the <b>random_position_server</b> for a random position, send this position as a goal for <b>go_to_point</b> action and cancel the goal if requested.</p>
+<p>A node managing the robot behaviour. It receives commands from <b>user_interface</b> via a service and implements a simple finite state machine. It can request the <b>random_position_server</b> for a random position, send this position as a goal for <b>go_to_point</b> action and cancel the goal if requested.</p>
 <h3><a class="anchor" id="autotoc_md6"></a>
 random_position_server</h3>
 <p>A node implementing a service for generating random positions. Provides the <b>state_machine</b> with random positions for <b>go_to_point</b>.</p>
