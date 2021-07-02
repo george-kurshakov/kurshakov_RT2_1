@@ -89,6 +89,7 @@ int main(int argc, char **argv)
         std::cout << "\nGoing to the position: x= " << p.x << " y= " <<p.y << " theta = " <<p.theta << std::endl;
         // Send the position as a goal to /go_to_point
         ac.sendGoal(p);
+        isGoalCanceled = false;
         // Wait until the goal is reached
         state = WAITING_SUCCESS;
         break;
