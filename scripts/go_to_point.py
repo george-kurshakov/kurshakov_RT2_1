@@ -1,10 +1,23 @@
-## 
-#  @file go_to_point.py
-#  @brief A node implementing goal reaching algorithm
-#  @author Georgii A. Kurshakov
-#  @version 1.0
-#  @date 02/07/2021
-#  
+"""
+.. module:: go_to_point
+    :platform: ROS
+    :synopsis: A node implementing goal reaching algorithm
+    
+.. moduleauthor:: Georgii A. Kurshakov kurshakov98@gmail.com
+
+A node implementing goal reaching algorithm
+
+Action:
+    /go_to_point
+    
+Subscriber:
+    /odom
+    
+Publisher:
+    /cmd_vel
+    
+"""
+
 #! /usr/bin/env python
 
 import rospy
@@ -17,8 +30,17 @@ import math
 
 # robot state variables
 position_ = Point()
+"""
+Current position of the robot
+"""
 yaw_ = 0
+"""
+Current yaw of the robot
+"""
 state_ = 0
+"""
+A state variable for the action state machine
+"""
 pub_ = None
 
 #action server
@@ -34,15 +56,14 @@ ub_a = 0.6
 lb_a = -0.5
 ub_d = 0.6
 
-## 
-#  @brief Odometry callback
-#  
-#  @param  msg /odom message
-#  @return nothing
-#  
-#  @details Getting current position and yaw.
-#  
 def clbk_odom(msg):
+    """
+    Odometry callback function for getting current position and yaw.
+    
+    Args:
+        msg: the */odom* message
+    
+    """
     global position_
     global yaw_
 
@@ -58,35 +79,38 @@ def clbk_odom(msg):
     euler = transformations.euler_from_quaternion(quaternion)
     yaw_ = euler[2]
 
-## 
-#  @brief Change goal reaching state
-#  
-#  @param  state New state
-#  @return nothing
-#  
 def change_state(state):
+    """
+    Change goal reaching state.
+    
+    Args:
+        state(Bool): the new state
+    """
     global state_
     state_ = state
     print ('State changed to [%s]' % state_)
 
-## 
-#  @brief Keep the angle within the constraints
-#  
-#  @param  angle An angle to normalize
-#  @return Normalized angle
-#  
 def normalize_angle(angle):
+    """
+    Keep the angle within the constraints (pi and -pi).
+    
+    Args:
+        angle(Float): the input angle
+    
+    Returns:
+        angle(Float): the normalized angle.
+    """
     if(math.fabs(angle) > math.pi):
         angle = angle - (2 * math.pi * angle) / (math.fabs(angle))
     return angle
 
-## 
-#  @brief Fix the initial yaw
-#  
-#  @param  des_pos Desired position value
-#  @return nothing
-#  
 def fix_yaw(des_pos):
+    """
+    Fix the initial yaw.
+    
+    Args:
+        des_pos(Float): the desired position value.
+    """
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = normalize_angle(desired_yaw - yaw_)
     rospy.loginfo(err_yaw)
@@ -104,13 +128,13 @@ def fix_yaw(des_pos):
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(1)
 
-## 
-#  @brief Go straight ahead reaching the desired position
-#  
-#  @param  des_pos Desired position value
-#  @return nothing
-#  
 def go_straight_ahead(des_pos):
+    """
+    Go straight ahead reaching the desired position.
+    
+    Args:
+        des_pos(Float): the desired position value
+    """
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = desired_yaw - yaw_
     err_pos = math.sqrt(pow(des_pos.y - position_.y, 2) +
@@ -137,13 +161,14 @@ def go_straight_ahead(des_pos):
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(0)
 
-## 
-#  @brief Fix the final yaw
-#  
-#  @param  des_yaw Desired yaw value
-#  @return nothing
-#  
+
 def fix_final_yaw(des_yaw):
+    """
+    Fix the final yaw.
+    
+    Args:
+        des_yaw(Float): the desired yaw value
+    """
     err_yaw = normalize_angle(des_yaw - yaw_)
     rospy.loginfo(err_yaw)
     ang_coef = rospy.get_param("ang_vel")
@@ -160,26 +185,22 @@ def fix_final_yaw(des_yaw):
         #print ('Yaw error: [%s]' % err_yaw)
         change_state(3)
         
-## 
-#  @brief Set all the velocities to 0
-#  
-#  @return nothing
-#  
 def done():
+    """
+    Set all the velocities to 0.
+    """
     twist_msg = Twist()
     twist_msg.linear.x = 0
     twist_msg.angular.z = 0
     pub_.publish(twist_msg)
   
-## 
-#  @brief Action implementation
-#  
-#  @param  goal New goal
-#  @return nothing
-#  
-#  @details A simple state machine for reaching the goal.
-#  
 def planning(goal):
+    """
+    go_to_point action implementation. A simple state machine for reaching the goal.
+    
+    Args:
+        goal: the new goal
+    """
 
     global state_
     global act_s
@@ -229,6 +250,9 @@ def planning(goal):
   
 
 def main():
+    """
+    The main function initializing the node with all its publishers, subscribers and actions.
+    """
     global pub_, act_s
     rospy.init_node('go_to_point')
     pub_ = rospy.Publisher('/cmd_vel', Twist, queue_size=1)

@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Solution<sp/>to<sp/>the<sp/>First<sp/>Assignment<sp/>of<sp/>the<sp/>Research<sp/>Track<sp/>2<sp/>course<sp/>(Robotics<sp/>Engineering<sp/>/<sp/>JEMARO,<sp/>Unige)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>By<sp/>Georgii<sp/>A.<sp/>Kurshakov</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>package<sp/>contains<sp/>the<sp/>nodes<sp/>and<sp/>the<sp/>simulation<sp/>environment<sp/>for<sp/>controlling<sp/>a<sp/>mobile<sp/>robot<sp/>in<sp/>the<sp/>Gazebo<sp/>simulation<sp/>environment.</highlight></codeline>
+<codeline><highlight class="normal">&gt;<sp/>This<sp/>branch<sp/>contains<sp/>the<sp/>Doxygen<sp/>documentation<sp/>since<sp/>it<sp/>was<sp/>here<sp/>from<sp/>the<sp/>beginning!<sp/>For<sp/>the<sp/>Sphinx<sp/>documentation<sp/>another<sp/>branch<sp/>will<sp/>be<sp/>created.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Required<sp/>packages</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/><sp/>roscpp</highlight></codeline>
+<codeline><highlight class="normal">-<sp/><sp/>rospy</highlight></codeline>
+<codeline><highlight class="normal">-<sp/><sp/>message_generation</highlight></codeline>
+<codeline><highlight class="normal">-<sp/><sp/>actionlib</highlight></codeline>
+<codeline><highlight class="normal">-<sp/><sp/>actionlib_msgs</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Description<sp/>of<sp/>the<sp/>system</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>package<sp/>consists<sp/>of<sp/>the<sp/>following<sp/>nodes:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">-<sp/>**state_machine**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**random_position_server**</highlight></codeline>
+<codeline><highlight class="normal">-<sp/>**go_to_point**</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">####<sp/>state_machine</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>node<sp/>managing<sp/>the<sp/>robot<sp/>behaviour.<sp/></highlight></codeline>
+<codeline><highlight class="normal">It<sp/>receives<sp/>commands<sp/>from<sp/>**user_interface**<sp/>via<sp/>a<sp/>service<sp/>and<sp/>implements<sp/>a<sp/>simple<sp/>finite<sp/>state<sp/>machine.</highlight></codeline>
+<codeline><highlight class="normal">It<sp/>can<sp/>request<sp/>the<sp/>**random_position_server**<sp/>for<sp/>a<sp/>random<sp/>position,<sp/>send<sp/>this<sp/>position<sp/>as<sp/>a<sp/>goal</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>**go_to_point**<sp/>action<sp/>and<sp/>cancel<sp/>the<sp/>goal<sp/>if<sp/>requested.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">####<sp/>random_position_server</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>node<sp/>implementing<sp/>a<sp/>service<sp/>for<sp/>generating<sp/>random<sp/>positions.<sp/></highlight></codeline>
+<codeline><highlight class="normal">Provides<sp/>the<sp/>**state_machine**<sp/>with<sp/>random<sp/>positions<sp/>for<sp/>**go_to_point**.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">####<sp/>go_to_point</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">A<sp/>node<sp/>implementing<sp/>an<sp/>action<sp/>for<sp/>reaching<sp/>the<sp/>goal<sp/>position<sp/>using<sp/>a<sp/>publisher<sp/>on<sp/>topic<sp/>*/cmd_vel*<sp/>and<sp/>a<sp/>subscriber<sp/>on<sp/>topic<sp/>*/odom*.</highlight></codeline>
+<codeline><highlight class="normal">**state_machine**<sp/>is<sp/>able<sp/>to<sp/>send<sp/>a<sp/>goal<sp/>and<sp/>cancel<sp/>it.<sp/>Once<sp/>the<sp/>goal<sp/>is<sp/>cancelled,<sp/>the<sp/>robot<sp/>stops<sp/>immediately.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Instructions<sp/>to<sp/>run<sp/>the<sp/>code</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">All<sp/>the<sp/>instructions<sp/>can<sp/>be<sp/>found<sp/>in<sp/>the<sp/>**interface.ipynb**<sp/>Jupyter<sp/>Notebook<sp/>file.</highlight></codeline>
+    </programlisting>
+    <location file="README.md"/>
+  </compounddef>
+</doxygen>

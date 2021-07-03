@@ -1,5 +1,5 @@
-\hypertarget{state__machine_8cpp}{}\doxysection{E\+:/\+RT/ros/src/kurshakov\+\_\+\+RT2\+\_\+1/src/state\+\_\+machine.cpp File Reference}
-\label{state__machine_8cpp}\index{E:/RT/ros/src/kurshakov\_RT2\_1/src/state\_machine.cpp@{E:/RT/ros/src/kurshakov\_RT2\_1/src/state\_machine.cpp}}
+\hypertarget{state__machine_8cpp}{}\doxysection{src/state\+\_\+machine.cpp File Reference}
+\label{state__machine_8cpp}\index{src/state\_machine.cpp@{src/state\_machine.cpp}}
 
 
 A node implementing a state machine.  
@@ -11,20 +11,28 @@ A node implementing a state machine.
 {\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
 {\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
 {\ttfamily \#include $<$rt2\+\_\+assignment1/\+Position\+Action.\+h$>$}\newline
+Include dependency graph for state\+\_\+machine.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{state__machine_8cpp__incl}
+\end{center}
+\end{figure}
 \doxysubsection*{Macros}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{state__machine_8cpp_a9c21a7caee326d7803b94ae1952b27ca}\label{state__machine_8cpp_a9c21a7caee326d7803b94ae1952b27ca}} 
-\#define {\bfseries IDLE}~0
+\#define {\bfseries I\+D\+LE}~0
 \item 
 \mbox{\Hypertarget{state__machine_8cpp_a5107a8c7df704815bb62f77994e6f3f3}\label{state__machine_8cpp_a5107a8c7df704815bb62f77994e6f3f3}} 
-\#define {\bfseries SETTING\+\_\+\+GOAL}~1
+\#define {\bfseries S\+E\+T\+T\+I\+N\+G\+\_\+\+G\+O\+AL}~1
 \item 
 \mbox{\Hypertarget{state__machine_8cpp_ab069d376e67472e3849c0ab7c769412f}\label{state__machine_8cpp_ab069d376e67472e3849c0ab7c769412f}} 
-\#define {\bfseries WAITING\+\_\+\+SUCCESS}~2
+\#define {\bfseries W\+A\+I\+T\+I\+N\+G\+\_\+\+S\+U\+C\+C\+E\+SS}~2
 \item 
 \mbox{\Hypertarget{state__machine_8cpp_a8e0faf39731ba4260c68e6d87801779d}\label{state__machine_8cpp_a8e0faf39731ba4260c68e6d87801779d}} 
-\#define {\bfseries STOPPING}~3
+\#define {\bfseries S\+T\+O\+P\+P\+I\+NG}~3
 \end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -37,9 +45,8 @@ int {\bfseries main} (int argc, char $\ast$$\ast$argv)
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}{state}} = IDLE
+int \mbox{\hyperlink{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}{state}} = I\+D\+LE
 \begin{DoxyCompactList}\small\item\em State variable. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{state__machine_8cpp_aa0153a172f8c2acee346be680c5802c4}\label{state__machine_8cpp_aa0153a172f8c2acee346be680c5802c4}} 
 bool \mbox{\hyperlink{state__machine_8cpp_aa0153a172f8c2acee346be680c5802c4}{is\+Goal\+Canceled}} = false
 \begin{DoxyCompactList}\small\item\em A variable used to avoid sending goal cancel request when there is no goal. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -82,25 +89,35 @@ true if succeeded
 Callback is setting the state according to a received command\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Command   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ State    }\\\cline{1-2}
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Command }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ State  }\\\cline{1-2}
 \endfirsthead
 \hline
 \endfoot
 \hline
-\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Command   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ State    }\\\cline{1-2}
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Command }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ State  }\\\cline{1-2}
 \endhead
-start   &SETTING\+\_\+\+GOAL    \\\cline{1-2}
-stop   &IDLE    \\\cline{1-2}
-stop\+\_\+now   &STOPPING   \\\cline{1-2}
+start &S\+E\+T\+T\+I\+N\+G\+\_\+\+G\+O\+AL  \\\cline{1-2}
+stop &I\+D\+LE  \\\cline{1-2}
+stop\+\_\+now &S\+T\+O\+P\+P\+I\+NG  \\\cline{1-2}
 \end{longtabu}
 
 
 \doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{state__machine_8cpp_aa0153a172f8c2acee346be680c5802c4}\label{state__machine_8cpp_aa0153a172f8c2acee346be680c5802c4}} 
+\index{state\_machine.cpp@{state\_machine.cpp}!isGoalCanceled@{isGoalCanceled}}
+\index{isGoalCanceled@{isGoalCanceled}!state\_machine.cpp@{state\_machine.cpp}}
+\doxysubsubsection{\texorpdfstring{isGoalCanceled}{isGoalCanceled}}
+{\footnotesize\ttfamily bool is\+Goal\+Canceled = false}
+
+
+
+A variable used to avoid sending goal cancel request when there is no goal. 
+
 \mbox{\Hypertarget{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}\label{state__machine_8cpp_a89f234133d3efe315836311cbf21c64b}} 
 \index{state\_machine.cpp@{state\_machine.cpp}!state@{state}}
 \index{state@{state}!state\_machine.cpp@{state\_machine.cpp}}
 \doxysubsubsection{\texorpdfstring{state}{state}}
-{\footnotesize\ttfamily int state = IDLE}
+{\footnotesize\ttfamily int state = I\+D\+LE}
 
 
 
@@ -109,15 +126,15 @@ State variable.
 Can have following values\+: \tabulinesep=1mm
 \begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
 \hline
-\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Behaviour    }\\\cline{1-2}
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Behaviour  }\\\cline{1-2}
 \endfirsthead
 \hline
 \endfoot
 \hline
-\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Behaviour    }\\\cline{1-2}
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Value }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Behaviour  }\\\cline{1-2}
 \endhead
-IDLE   &do not send any requests    \\\cline{1-2}
-SETTING\+\_\+\+GOAL   &get a random position value from /position\+\_\+server and send it as a goal to /go\+\_\+to\+\_\+point    \\\cline{1-2}
-WAITING\+\_\+\+SUCCESS   &check if the goal position has been reached    \\\cline{1-2}
-STOPPING   &send a goal cancel request to /go\+\_\+to\+\_\+point   \\\cline{1-2}
+I\+D\+LE &do not send any requests  \\\cline{1-2}
+S\+E\+T\+T\+I\+N\+G\+\_\+\+G\+O\+AL &get a random position value from /position\+\_\+server and send it as a goal to /go\+\_\+to\+\_\+point  \\\cline{1-2}
+W\+A\+I\+T\+I\+N\+G\+\_\+\+S\+U\+C\+C\+E\+SS &check if the goal position has been reached  \\\cline{1-2}
+S\+T\+O\+P\+P\+I\+NG &send a goal cancel request to /go\+\_\+to\+\_\+point  \\\cline{1-2}
 \end{longtabu}
