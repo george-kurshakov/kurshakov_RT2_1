@@ -3,7 +3,7 @@
 ## By Georgii A. Kurshakov
 
 The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment.
-> This branch contains the Doxygen documentation since it was here from the beginning! For the Sphinx documentation another branch will be created.
+> This branch contains the Sphinx documentation.
 
 ### Required packages
 
